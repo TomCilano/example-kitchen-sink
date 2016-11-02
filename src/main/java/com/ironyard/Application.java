@@ -21,7 +21,7 @@ import static springfox.documentation.builders.PathSelectors.regex;
 @SpringBootApplication
 public class Application {
 
-    public static void main(String[] args){
+    public static void main(String[] args) {
         SpringApplication.run(Application.class);
     }
 
@@ -32,8 +32,16 @@ public class Application {
                 .apiInfo(apiInfoUser())
                 .select()
                 .paths(regex("/rest/user.*"))
-                .build();
+                .build().globalOperationParameters(
+                        newArrayList(new ParameterBuilder()
+                                .name("x-authorization-key")
+                                .description("API Authorization Key")
+                                .modelRef(new ModelRef("string"))
+                                .parameterType("header")
+                                .required(true)
+                                .build()));
     }
+
 
     @Bean
     public Docket movieApi() {
@@ -42,15 +50,8 @@ public class Application {
                 .apiInfo(apiInfoMovies())
                 .select()
                 .paths(regex("/rest/movie.*"))
-                .build()
-                .globalOperationParameters(
-                 newArrayList(new ParameterBuilder()
-                        .name("x-authorization-key")
-                        .description("API Authorization Key")
-                        .modelRef(new ModelRef("string"))
-                        .parameterType("header")
-                        .required(true)
-                        .build()));
+                .build();
+
     }
 
     @Bean
@@ -62,6 +63,7 @@ public class Application {
                 .paths(regex("/rest/permission.*"))
                 .build();
     }
+
     private ApiInfo apiInfoPermissions() {
         return new ApiInfoBuilder()
                 .title("This is our API")
@@ -73,6 +75,7 @@ public class Application {
                 .version("2.1")
                 .build();
     }
+
     private ApiInfo apiInfoUser() {
         return new ApiInfoBuilder()
                 .title("This is our API")
@@ -84,6 +87,7 @@ public class Application {
                 .version("2.1")
                 .build();
     }
+
     private ApiInfo apiInfoMovies() {
         return new ApiInfoBuilder()
                 .title("This is our API")

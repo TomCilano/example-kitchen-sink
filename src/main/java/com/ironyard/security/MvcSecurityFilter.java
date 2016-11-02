@@ -17,12 +17,16 @@ public class MvcSecurityFilter implements javax.servlet.Filter {
                          FilterChain chain) throws IOException, ServletException {
         HttpServletRequest req = ((HttpServletRequest) request);
         HttpServletResponse resp = ((HttpServletResponse) response);
-        // check sessio
+        // check session
         IronUser usr = (IronUser) req.getSession().getAttribute("user");
-        boolean authorized = (usr != null);
+        boolean authorized = (usr != null || req.getRequestURI().contains("wideOpen"));
 
         // check destination
-        if(!authorized){
+//        if(!authorized){
+//            authorized = req.getRequestURI().contains("wideOpen");
+      //  }
+
+         if(!authorized){
             authorized =  req.getRequestURI().contains("login");
         }
 

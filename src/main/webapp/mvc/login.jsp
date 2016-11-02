@@ -1,3 +1,4 @@
+<%@ page import="com.ironyard.data.IronUser" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page isELIgnored="false" %>
 <html>
@@ -6,9 +7,9 @@
 </head>
 <body>
 <div>
-    <c:out value="${message}"/>
+
 </div>
-<form action="/mvc/login" method="post">
+<center><form action="/mvc/login" method="post">
     <div>
         User: <input type="text" name="username"/>
     </div>
@@ -16,7 +17,11 @@
         Password: <input type="password" name="password"/>
     </div>
     <input type="submit" name="Login">
-</form>
+</form></center>
+<center><a href="wideOpen.jsp">em kcilc!</a></center>
+
+
+
 </body>
 </html>
 

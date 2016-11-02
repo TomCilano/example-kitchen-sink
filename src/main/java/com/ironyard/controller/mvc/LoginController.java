@@ -25,25 +25,18 @@ public class LoginController {
 
     @RequestMapping(value = "/mvc/login", method = RequestMethod.POST)
     public String login(@RequestParam(value = "password", required = false) String password,
-                       @RequestParam(value = "username", required = false) String username,
-                       HttpServletRequest request) {
-        log.info("Login attempt by:"+username);
+                        @RequestParam(value = "username", required = false) String username,
+                        HttpServletRequest request) {
+        log.info("Login attempt by:" + username);
         String destination = "login";
         IronUser found = userRepository.findByUsernameAndPassword(username, password);
-        if(found != null){
-            request.getSession().setAttribute("user",found);
+        if (found != null) {
+            request.getSession().setAttribute("user", found);
             destination = "home";
-            log.info("found user:"+found.getId());
+            log.info("found user:" + found.getId());
 
         }
-        log.info("Login attempt result:"+destination);
+        log.info("Login attempt result:" + destination);
         return destination;
     }
-
-
-    @RequestMapping(value = "/mvc/login", method = RequestMethod.GET)
-    public String abc(){
-        return "login";
-    }
-
 }

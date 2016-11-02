@@ -6,6 +6,8 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ page isELIgnored="false" %>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -43,12 +45,13 @@
 </head>
 
 <body>
-
+<table>
+</table>
 <div class="container">
     <div class="header clearfix">
         <nav>
             <ul class="nav nav-pills pull-right">
-                <li role="presentation" class="active"><a href="/mvc/home">Home</a></li>
+                <li role="presentation" class="active"><a href="/mvc/home.jsp">Home</a></li>
                 <li role="presentation"><a href="/mnv/movies">Movies</a></li>
                 <li role="presentation"><a href="/mvc/users">Users</a></li>
                 <li role="presentation"><a href="/mvc/logout">Logout</a></li>

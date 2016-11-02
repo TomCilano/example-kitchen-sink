@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 /**
@@ -20,26 +21,23 @@ import java.util.Set;
 @Controller
 @RequestMapping(path = "/mvc/movie")
 public class MvcMovieController {
-
+    private IronUserRepository ironUserRepo;
     @Autowired
     IronUserRepository userRepository = null;
 
     @RequestMapping(value = "home", method = RequestMethod.GET)
-    public String home(Model model, HttpServletRequest request){
-        // get current logged in user, need to case (IronUser) to proper type
-        IronUser user = (IronUser)request.getSession().getAttribute("user");
+    public String list(Map<String, Object> model)
 
-        Long usrId = user.getId();
-
-        // get users favorites
-        Set<Movie> favs = userRepository.findOne(usrId).getFavs();
+    {
+        Iterable<IronUser> foundIt = null;
 
 
-        // put them in a model
-        model.addAttribute("favs", favs);
+        foundIt = ironUserRepo.findAll();
+        // put foundit into model
+        model.put("displayName", foundIt.iterator());
 
-        // send them to the dam
         return "home";
     }
-
 }
+
+
